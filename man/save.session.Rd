@@ -12,7 +12,7 @@ save.session(basename = "NULL", path = "NULL", version = "NULL",
 
 \item{path}{Directory to save backup files to.  Defaults to current working directory.  Creates directories unless they exist.}
 
-\item{version}{A date string or version number used as part of the backup filenames.  Cannot be an empty string.  Defaults to '%y.%m.%d.%H.%M' formatted timestamp.}
+\item{version}{A date string or version number used as part of the backup filenames.  Cannot be an empty string.  Defaults to %y.%m.%d.%H.%M formatted timestamps.}
 
 \item{verbose}{Print session loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.}
 

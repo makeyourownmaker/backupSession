@@ -185,7 +185,7 @@ load.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
 #' This function saves R session images, history and session info files which can be loaded with load.session().
 #' @param basename Basename for the R session images, history and session info files.
 #' @param path Directory to save backup files to.  Defaults to current working directory.  Creates directories unless they exist.
-#' @param version A date string or version number used as part of the backup filenames.  Cannot be an empty string.  Defaults to '%y.%m.%d.%H.%M' formatted timestamp.
+#' @param version A date string or version number used as part of the backup filenames.  Cannot be an empty string.  Defaults to %y.%m.%d.%H.%M formatted timestamps.
 #' @param verbose Print session loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.
 #' @param force Overwrite existing files.  Must be either TRUE or FALSE.  Defaults to FALSE.
 #' @export

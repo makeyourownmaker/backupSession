@@ -43,6 +43,7 @@ checkBackupParams <- function(basename, path, version, verbose, force) {
     stop("'force' parameter must be TRUE or FALSE!", call.=FALSE)
   }
  
+  return(0)
 }
 
 
@@ -70,6 +71,7 @@ loadBackupFile <- function(loadFile, verbose) {
 	message(paste0('Loaded ', loadFile))
   }
   
+  return(0)
 }
 
 
@@ -82,6 +84,7 @@ checkLoadBackupFile <- function(loadFile, verbose) {
     loadBackupFile(loadFile, verbose)
   }
   
+  return(0)
 }
 
 
@@ -104,6 +107,7 @@ saveBackupFile <- function(saveFile, verbose) {
 	message(paste0('Saved ', saveFile))
   }  
   
+  return(0)
 }
 
 
@@ -124,6 +128,7 @@ checkSaveBackupFile <- function(saveFile, force, verbose) {
     saveBackupFile(saveFile, verbose)
   }
   
+  return(0)
 }
 
 
@@ -177,6 +182,7 @@ load.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
   checkLoadBackupFile(backupFiles$hist, verbose)
   checkLoadBackupFile(backupFiles$info, verbose)
 
+  return(0)
 }
 
 
@@ -219,6 +225,7 @@ save.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
   checkSaveBackupFile(backupFiles$hist, force, verbose)
   checkSaveBackupFile(backupFiles$info, force, verbose)
   
+  return(0)
 }
 
 

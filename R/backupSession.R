@@ -139,9 +139,9 @@ getBackupFilenames <- function(basename, path, version) {
   }
   
   baseFile <- paste0(basename, '.', version)
-  dataFile <- paste0(path, '/', baseFile, '.RData')
-  infoFile <- paste0(path, '/', baseFile, '.RInfo')
-  histFile <- paste0(path, '/', baseFile, '.RHistory')
+  dataFile <- file.path(path, paste0(baseFile, '.RData'))
+  infoFile <- file.path(path, paste0(baseFile, '.RInfo'))
+  histFile <- file.path(path, paste0(baseFile, '.RHistory'))
   
   return(list(data=dataFile, info=infoFile, hist=histFile))
 }

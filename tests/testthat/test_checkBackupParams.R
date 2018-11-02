@@ -37,6 +37,10 @@ test_that("saveBackupFile: Produces errors with unsupported file extensions", {
 test_that("load.session: Produces errors with empty version string", {
   expect_error(load.session(basename='projectX', path='NULL', version='', verbose=FALSE), "Cannot use empty string for 'version'")              
 })
+
+test_that("getBackupFilenames returns a list" , {
+  expect_output(str(getBackupFilenames('projectX', './', '12.12.12')), "List of 3")
+})
   
 saveBackupFile('projectX.12.12.12.RData', FALSE)
 #saveBackupFile('projectX.12.12.12.RHistory', FALSE)

@@ -94,7 +94,7 @@ saveBackupFile <- function(saveFile, verbose) {
     save.image(file=saveFile)
   }
   else if ( grepl("\\.RHistory$", saveFile, perl=TRUE) ) {
-    savehistory(file=saveFile)
+    if (interactive()) savehistory(file=saveFile) # covr::package_coverage() function fails without this
   }
   else if ( grepl("\\.RInfo$", saveFile, perl=TRUE) ) {
     saveRDS(sessionInfo(), file=saveFile)

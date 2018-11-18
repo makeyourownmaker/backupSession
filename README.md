@@ -10,6 +10,7 @@ backupSession is an R package for saving and loading consistently named and vers
 
 ```
 # install.packages("devtools")
+library(devtools)
 devtools::install_github("makeyourownmaker/backupSession")
 ```
 

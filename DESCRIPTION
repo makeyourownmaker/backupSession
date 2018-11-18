@@ -1,7 +1,7 @@
 Package: backupSession
 Title: Save and load R session images, history and sessionInfo
 Description: backupSession is an R package for saving and loading consistently named and versioned session images, history and sessionInfo().  It can save and load three types of files: 1) R session images, 2) R command histories and 3) R sessionInfo() output.
-Version: 0.1.7
+Version: 0.1.8
 Depends: R (>= 3.2.0)
 Authors@R: person("Fraal", "Off", email = "fraal.off@example.com", role = c("aut", "cre"))
 BugReports: https://github.com/makeyourownmaker/backupSession/issues

@@ -50,7 +50,7 @@ checkBackupParams <- function(basename, path, version, verbose, force) {
 loadBackupFile <- function(loadFile, verbose) {
 
   if ( grepl("\\.RData$", loadFile, perl=TRUE) ) {
-    load(file=loadFile)
+    load(file=loadFile, envir=.GlobalEnv)
   }
   else if ( grepl("\\.RHistory$", loadFile, perl=TRUE) ) {
     loadhistory(file=loadFile)
@@ -182,7 +182,6 @@ load.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
   checkLoadBackupFile(backupFiles$hist, verbose)
   checkLoadBackupFile(backupFiles$info, verbose)
 
-  return(0)
 }
 
 
@@ -225,7 +224,6 @@ save.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
   checkSaveBackupFile(backupFiles$hist, force, verbose)
   checkSaveBackupFile(backupFiles$info, force, verbose)
   
-  return(0)
 }
 
 

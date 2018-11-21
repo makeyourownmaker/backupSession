@@ -160,7 +160,7 @@ getBackupFilenames <- function(basename, path, version) {
 #' load.session(basename='projectX', path='./backups/', version='01.03.18.11.43')
 load.session <- function(basename='NULL', path='NULL', version='NULL', verbose=FALSE) {
 
-  checkBackupParams(basename, path, version, verbose, force=FALSE)
+  a <- checkBackupParams(basename, path, version, verbose, force=FALSE)
   
   if (path == 'NULL') { # R 3.2.0 specific
     path <- getwd()
@@ -178,9 +178,9 @@ load.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
   backupFiles <- getBackupFilenames(basename, path, version)
 
   # Check files exist and load them
-  checkLoadBackupFile(backupFiles$data, verbose)  
-  checkLoadBackupFile(backupFiles$hist, verbose)
-  checkLoadBackupFile(backupFiles$info, verbose)
+  b <- checkLoadBackupFile(backupFiles$data, verbose)  
+  c <- checkLoadBackupFile(backupFiles$hist, verbose)
+  d <- checkLoadBackupFile(backupFiles$info, verbose)
 
 }
 
@@ -198,7 +198,7 @@ load.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
 #' save.session(basename='projectX', path='./backups/', version='01.03.18.11.43')
 save.session <- function(basename='NULL', path='NULL', version='NULL', verbose=FALSE, force=FALSE) {
 
-  checkBackupParams(basename, path, version, verbose, force)
+  a <- checkBackupParams(basename, path, version, verbose, force)
  
   if (path == 'NULL') { # R 3.2.0 specific
     path <- getwd()
@@ -220,9 +220,9 @@ save.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
   backupFiles <- getBackupFilenames(basename, path, version)
 
   # Check files don't exist and save them
-  checkSaveBackupFile(backupFiles$data, force, verbose)  
-  checkSaveBackupFile(backupFiles$hist, force, verbose)
-  checkSaveBackupFile(backupFiles$info, force, verbose)
+  b <- checkSaveBackupFile(backupFiles$data, force, verbose)  
+  c <- checkSaveBackupFile(backupFiles$hist, force, verbose)
+  d <- checkSaveBackupFile(backupFiles$info, force, verbose)
   
 }
 

@@ -47,7 +47,7 @@ checkBackupParams <- function(basename, path, version, verbose, force) {
 }
 
 
-loadBackupFile <- function(loadFile, verbose) {
+loadBackupFile <- function(loadFile, verbose=FALSE) {
 
   if ( grepl("\\.RData$", loadFile, perl=TRUE) ) {
     load(file=loadFile, envir=.GlobalEnv)
@@ -75,7 +75,7 @@ loadBackupFile <- function(loadFile, verbose) {
 }
 
 
-checkLoadBackupFile <- function(loadFile, verbose) {
+checkLoadBackupFile <- function(loadFile, verbose=FALSE) {
 
   if (!file.exists(loadFile)) { # R 3.2.0 specific (April 2015)
 	stop(paste0(loadFile, ' does not exist!'), call.=FALSE)
@@ -88,7 +88,7 @@ checkLoadBackupFile <- function(loadFile, verbose) {
 }
 
 
-saveBackupFile <- function(saveFile, verbose) {
+saveBackupFile <- function(saveFile, verbose=FALSE) {
 
   if ( grepl("\\.RData$", saveFile, perl=TRUE) ) {
     save.image(file=saveFile)
@@ -111,7 +111,7 @@ saveBackupFile <- function(saveFile, verbose) {
 }
 
 
-checkSaveBackupFile <- function(saveFile, force, verbose) {
+checkSaveBackupFile <- function(saveFile, force=FALSE, verbose=FALSE) {
 
   if (file.exists(saveFile)) { # R 3.2.0 specific (April 2015)
 	warning(paste0(saveFile, ' exists!'), call.=FALSE)

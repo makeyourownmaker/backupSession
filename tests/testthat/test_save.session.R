@@ -11,11 +11,14 @@ library(backupSession)
 #save.session <- function(basename='NULL', path='NULL', version='NULL', verbose=FALSE, force=FALSE) {
 save.session(basename='projectX', path='.', version='12.12.12')
 
-
 test_that("save.session: Given correct inputs the function saves expected files", {
   expect_that(file.exists(file.path("projectX.12.12.12.RData")),     is_true())
   expect_that(file.exists(file.path("projectX.12.12.12.RInfo")),     is_true())
   #expect_that(file.exists(file.path("projectX.12.12.12.RHistory")), is_true()) # works with testthat but not with covr::package_coverage()
+})
+
+test_that("save.session: Given existent files and force=FALSE will fail", {
+  expect_that(save.session(basename='projectX', path='.', version='12.12.12', force=FALSE), gives_warning())
 })
 
 fn <- 'projectX.12.12.12.RData';    if (file.exists(fn)) file.remove(fn)

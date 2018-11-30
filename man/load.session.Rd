@@ -20,5 +20,7 @@ load.session(basename = "NULL", path = "NULL", version = "NULL",
 This function loads R session images, history and session info files saved with save.session().
 }
 \examples{
-load.session(basename='projectX', path='./backups/', version='01.03.18.11.43')
+\dontrun{
+load.session(basename='projectX', path='./backups', version='01.03.18.11.43')
+}
 }

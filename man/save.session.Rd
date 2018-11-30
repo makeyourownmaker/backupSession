@@ -22,5 +22,5 @@ save.session(basename = "NULL", path = "NULL", version = "NULL",
 This function saves R session images, history and session info files which can be loaded with load.session().
 }
 \examples{
-save.session(basename='projectX', path='./backups/', version='01.03.18.11.43')
+save.session(basename='projectX', path='./backups', version='01.03.18.11.43')
 }

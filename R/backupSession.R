@@ -227,4 +227,12 @@ save.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
 }
 
 
-
+#' backupSession: Save and Load R Session Images, History and sessionInfo
+#' 
+#' Save and load consistently named and versioned session images, history and sessionInfo().  
+#' This package will save and load three types of files: 1) R session images, 2) R command histories and 3) R sessionInfo() output.
+#' See ?save.session and ?load.session for usage examples and further information.
+#' 
+#' @docType package
+#' @name backupSession
+NULL

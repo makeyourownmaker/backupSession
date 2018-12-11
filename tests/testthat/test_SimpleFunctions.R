@@ -2,21 +2,21 @@ context("Simple Functions")
 library(backupSession)
 
 test_that("loadBackupFile: Produces errors with unsupported file extensions", {
-  expect_error(loadBackupFile('projectX.12.12.12.FOO', FALSE), "not supported!")              
+  expect_error(loadBackupFile('projectX.12.12.12.NOPE', FALSE), "not supported!")              
 })
 
 # Disabling below test for now to avoid below warning
 #  test_SimpleFunctions.R:9: warning: loadBackupFile: Produces errors with non-existent files
 #        Still getting 0 returned - from last function calling
-#  cannot open compressed file 'foobar.12.12.12.RData', probable reason 'No such file or directory'
+#  cannot open compressed file 'Yproject.12.12.12.RData', probable reason 'No such file or directory'
 #test_that("loadBackupFile: Produces errors with non-existent files", {
-#  expect_error(loadBackupFile('foobar.12.12.12.RData', FALSE), "cannot open the connection")              
-#  #expect_that(loadBackupFile('foobar.12.12.12.RData', FALSE), gives_warning())              
+#  expect_error(loadBackupFile('Yproject.12.12.12.RData', FALSE), "cannot open the connection")              
+#  #expect_that(loadBackupFile('Yproject.12.12.12.RData', FALSE), gives_warning())              
 #})
 
 
 test_that("checkLoadBackupFile: Produces errors with non-existent files", {
-  expect_error(checkLoadBackupFile('foobar.12.12.12.RData', FALSE), "does not exist!")              
+  expect_error(checkLoadBackupFile('Yproject.12.12.12.RData', FALSE), "does not exist!")              
 })
 
 

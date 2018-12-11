@@ -6,7 +6,7 @@ test_that("load.session: Produces errors with empty version string", {
 })
 
 test_that("load.session: Given non-existent files will fail", {
-  expect_that(load.session(basename='foobar', path='.', version='12.12.12'), throws_error())
+  expect_that(load.session(basename='Yproject', path='.', version='12.12.12'), throws_error())
 })
 
 

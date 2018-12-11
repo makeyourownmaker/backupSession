@@ -3,7 +3,7 @@ library(backupSession)
 
 
 test_that("saveBackupFile: Produces errors with unsupported file extensions", {
-  expect_error(saveBackupFile('projectX.12.12.12.FOO', FALSE), "not supported!")              
+  expect_error(saveBackupFile('projectX.12.12.12.NOPE', FALSE), "not supported!")              
 })
 
 saveBackupFile('projectX.12.12.12.RData', FALSE)

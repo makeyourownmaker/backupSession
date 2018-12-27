@@ -1,6 +1,8 @@
 
 # backupSession
 
+[![Travis-CI Build Status](https://travis-ci.org/makeyourownmaker/backupSession.svg?branch=master)](https://travis-ci.org/makeyourownmaker/backupSession)
+
 backupSession is an R package for saving and loading consistently named and versioned R session images, history and sessionInfo().
 
 ## Installation

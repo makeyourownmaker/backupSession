@@ -53,7 +53,9 @@ loadBackupFile <- function(loadFile, verbose=FALSE) {
     load(file=loadFile, envir=.GlobalEnv)
   }
   else if ( grepl("\\.RHistory$", loadFile, perl=TRUE) ) {
-    loadhistory(file=loadFile)
+    # TODO Got to fix the interactive package_coverage problem because want to load/save in non-interactive sessions!
+    #loadhistory(file=loadFile)
+    if (interactive()) loadhistory(file=loadFile) # covr::package_coverage() function fails without this
   }
   else if ( grepl("\\.RInfo$", loadFile, perl=TRUE) ) {
     sessionInformation <- readRDS(file=loadFile)
@@ -94,6 +96,8 @@ saveBackupFile <- function(saveFile, verbose=FALSE) {
     save.image(file=saveFile)
   }
   else if ( grepl("\\.RHistory$", saveFile, perl=TRUE) ) {
+    # TODO Got to fix the interactive package_coverage problem because want to load/save in non-interactive sessions!
+    #savehistory(file=saveFile)
     if (interactive()) savehistory(file=saveFile) # covr::package_coverage() function fails without this
   }
   else if ( grepl("\\.RInfo$", saveFile, perl=TRUE) ) {

@@ -10,3 +10,13 @@ test_that("load.session: Given non-existent files will fail", {
 })
 
 
+test_that("load.session: Succeeds with backup under data directory", {
+  expect_error(load.session(basename='iris.example', version='19.01.14.13.22'), NA)
+})
+
+#foo <- load.session(basename='iris.example', version='19.01.14.13.22')
+#foo <- ls()
+#test_that("load.session: Succeeds with backup under data directory", {
+#  expect_that(length(foo), equals(4))
+#})
+

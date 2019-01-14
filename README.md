@@ -27,27 +27,27 @@ devtools::install_github("makeyourownmaker/backupSession")
 
 ```library(backupSession)
 
-save.session(basename='projectX', path='./backups/', version='01.03.18.11.43')
-load.session(basename='projectX', path='./backups/', version='01.03.18.11.43')
+save.session(basename='projectX', version='01.03.18.11.43', path='./backups')
+load.session(basename='projectX', version='01.03.18.11.43', path='./backups')
 ```
 
 ## Details
 
 The save.session function saves three files: 
-1) R session image in basename.version.RData
-2) R history in basename.version.RHistory
-3) R sessionInfo() in basename.version.RInfo
+1) R session image in path/basename.version.RData
+2) R history in path/basename.version.RHistory
+3) R sessionInfo() in path/basename.version.RInfo
 
-The load.session function loads these three files into the current R session.
+The load.session function loads these three files into the current R session.  It will overwrite existing data.
 
 The path parameter defaults to the current working directory.  The save.session function will create directories specified
 using the path parameter unless they exist.
 
 The version parameter in the save.session function defaults to a timestamp ("%y.%m%.%d.%H.%M") unless an alternative is specified.
 
-Both save.session and load.session have verbose parameters which print session saving and loading progress messages respectively.
+Both save.session and load.session have verbose options which print session saving and loading progress messages respectively.
 
-The force parameter in the save.session function will overwrite existing files.
+The force option in the save.session function will overwrite existing files.
 
 The load.session function will add a sessionInfo<version> variable to the global environment.  This variable contains
 the sessionInfo() string stored in the .RInfo file.

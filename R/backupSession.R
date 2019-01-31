@@ -80,7 +80,13 @@ loadBackupFile <- function(loadFile, verbose=FALSE) {
 checkLoadBackupFile <- function(loadFile, verbose=FALSE) {
 
   if (!file.exists(loadFile)) { # R 3.2.0 specific (April 2015)
-	stop(paste0(loadFile, ' does not exist!'), call.=FALSE)
+    # Don't warn about missing RHistory files (non-interactive R session problem)
+    if (grepl("\\.RHistory$", loadFile, perl=TRUE)) {
+      warning(paste0(loadFile, ' does not exist.  Continuing ...'), call.=FALSE)
+    } 
+    else {
+      stop(paste0(loadFile, ' does not exist!'), call.=FALSE)
+    }
   }
   else {
     loadBackupFile(loadFile, verbose)
@@ -154,7 +160,10 @@ getBackupFilenames <- function(basename, path, version) {
 
 #' load.session Function
 #'
-#' This function loads R session images, history and session info files saved with save.session().
+#' This function loads R session images, history and sessionInfo() files saved with save.session().
+#'
+#' It will overwrite objects in .GlobalEnv just as the load() function does.
+#'
 #' @param basename Basename for the R session images, history and session info files.
 #' @param path Directory to load backup files from.  Defaults to current working directory.
 #' @param version A date string or version number used as part of the backup filenames.  Cannot be an empty string.
@@ -191,7 +200,10 @@ load.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
 
 #' save.session Function
 #'
-#' This function saves R session images, history and session info files which can be loaded with load.session().
+#' This function saves R session images, history and sessionInfo() files which can be loaded with load.session().
+#'
+#' History files are NOT saved in non-interactive R sessions.
+#'
 #' @param basename Basename for the R session images, history and session info files.
 #' @param path Directory to save backup files to.  Defaults to current working directory.  Creates directories unless they exist.
 #' @param version A date string or version number used as part of the backup filenames.  Cannot be an empty string.  Defaults to year.month.date.hour.minute formatted timestamps.
@@ -199,7 +211,7 @@ load.session <- function(basename='NULL', path='NULL', version='NULL', verbose=F
 #' @param force Overwrite existing files.  Must be either TRUE or FALSE.  Defaults to FALSE.
 #' @export
 #' @examples
-#' save.session(basename='projectX', path='./backups/', version='01.03.18.11.43')
+#' save.session(basename='projectX', path='./backups', version='01.03.18.11.43')
 save.session <- function(basename='NULL', path='NULL', version='NULL', verbose=FALSE, force=FALSE) {
 
   a <- checkBackupParams(basename, path, version, verbose, force)

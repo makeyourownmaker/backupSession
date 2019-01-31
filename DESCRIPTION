@@ -1,11 +1,11 @@
 Package: backupSession
 Title: Save and Load R Session Images, History and sessionInfo
 Description: Save and load consistently named and versioned session images, history and sessionInfo().  This package will save and load three types of files: 1) R session images, 2) R command histories and 3) R sessionInfo() output.
-Version: 0.1.13
+Version: 0.1.14
 Depends: R (>= 3.2.0)
-Authors@R: person("Fraal", "Off", email = "fraal@off.com", role = c("aut", "cre"))
+Authors@R: person("MakeYour", "OwnMaker", email = "fraal@off.com", role = c("aut", "cre"))
 Author: Fraal Off [aut, cre]
-Maintainer: Fraal Off <fraal@off.com>
+Maintainer: MakeYour OwnMaker <fraal@off.com>
 BugReports: https://github.com/makeyourownmaker/backupSession/issues
 License: GPL-2 | file LICENSE
 URL: https://github.com/makeyourownmaker/backupSession

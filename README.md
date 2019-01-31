@@ -1,33 +1,39 @@
 
-# backupSession
+# backupSession <img src="man/figures/logo.png" align="right" />
 
 [![Travis-CI Build 
 Status](https://travis-ci.org/makeyourownmaker/backupSession.svg?branch=master)](https://travis-ci.org/makeyourownmaker/backupSession)
 [![codecov
 ](https://codecov.io/github/makeyourownmaker/backupSession/branch/master/graphs/badge.svg)](https://codecov.io/github/makeyourownmaker/backupSession)
+![Lifecycle 
+](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=flat)
+![Version
+](https://img.shields.io/badge/R%3E%3D-3.2.0-blue.svg)
 ![Dependencies
 ](https://img.shields.io/badge/dependencies-none-brightgreen.svg?style=flat)
-![Development 
-Stage](https://img.shields.io/badge/development%20stage-beta-brightgreen.svg?style=flat)
 
 backupSession is an R package for saving and loading consistently named and versioned R session images, history and sessionInfo().
 
 ## Installation
 
-### Requirements
-* R 3.2 and up
+Requires R version 3.2.0 and up
 
 ```
-# install.packages("devtools")
+# install.packages("devtools") # Install devtools package if necessary
 library(devtools)
 devtools::install_github("makeyourownmaker/backupSession")
 ```
 
 ## Usage
 
-```library(backupSession)
-
+```
+library(backupSession)
+# Work, work, work ...
 save.session(basename='projectX', version='01.03.18.11.43', path='./backups')
+q('no')
+
+# Start new R session
+library(backupSession)
 load.session(basename='projectX', version='01.03.18.11.43', path='./backups')
 ```
 
@@ -52,6 +58,8 @@ The force option in the save.session function will overwrite existing files.
 The load.session function will add a sessionInfo<version> variable to the global environment.  This variable contains
 the sessionInfo() string stored in the .RInfo file.
 
+The [testthat](http://testthat.r-lib.org/) package is required to run the tests but is not required for normal installations.
+
 
 Further info:
 ```
@@ -60,13 +68,25 @@ Further info:
 ```
 
 
+## Limitations
+
+History files are not saved during __non-interactive__ R sessions.
+
+
 ## Roadmap
 
 * Increase test coverage
 * Make CRAN release
 * Add meta data file (MData)
-  * Check if loading a backup will overwrite existing data 
+  * Check if loading a backup will overwrite existing data in current R session
   * Summarise changes between backups
+  * Remove excess backup files
+
+
+## Alternatives
+
+* [logR: Flexible logging of R console sessions](https://github.com/jdthorpe/logR)
+* [track: Store Objects on Disk Automatically](https://cran.r-project.org/web/packages/track/index.html)
 
 
 ## Contributing

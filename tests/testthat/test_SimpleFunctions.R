@@ -1,7 +1,7 @@
 context("Simple Functions")
 library(backupSession)
 
-test_that("loadBackupFile: Produces errors with unsupported file extensions", {
+test_that("loadBackupFile: Produces error with unsupported file extensions", {
   expect_error(loadBackupFile('projectX.12.12.12.NOPE', FALSE), "not supported!")              
 })
 
@@ -15,15 +15,19 @@ test_that("loadBackupFile: Produces errors with unsupported file extensions", {
 #})
 
 
-test_that("checkLoadBackupFile: Produces errors with non-existent files", {
+test_that("checkLoadBackupFile: Produces error with non-existent files", {
   expect_error(checkLoadBackupFile('Yproject.12.12.12.RData', FALSE), "does not exist!")              
 })
 
 
 save.session(basename='projectX', path='.', version='12.12.12')
 
-test_that("checkSaveBackupFile: Produces errors with existent files and force=FALSE", {
+test_that("checkSaveBackupFile: Produces warning with existent files and force=FALSE", {
   expect_that(checkSaveBackupFile('projectX.12.12.12.RData', force=FALSE), gives_warning())              
+})
+
+test_that("checkSaveBackupFile: Produces warning with existent files and force=TRUE", {
+  expect_that(checkSaveBackupFile('projectX.12.12.12.RData', force=TRUE), gives_warning())              
 })
 
 fn <- 'projectX.12.12.12.RData';    if (file.exists(fn)) file.remove(fn)

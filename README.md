@@ -1,6 +1,17 @@
 
 # backupSession <img src="man/figures/logo.png" align="right" />
 
+[![Travis-CI Build
+Status](https://travis-ci.org/makeyourownmaker/backupSession.svg?branch=master)](https://travis-ci.org/makeyourownmaker/backupSession)
+[![codecov
+](https://codecov.io/github/makeyourownmaker/backupSession/branch/master/graphs/badge.svg)](https://codecov.io/github/makeyourownmaker/backupSession)
+![Lifecycle
+](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=flat)
+![R 
+>= 3.2.0](https://img.shields.io/badge/R>=3.2.0-blue.svg?style=flat)
+![Dependencies
+](https://img.shields.io/badge/dependencies-none-brightgreen.svg?style=flat)
+
 backupSession is an R package for saving and loading consistently named and versioned R session images, history and sessionInfo().
 
 

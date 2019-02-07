@@ -8,7 +8,7 @@ Status](https://travis-ci.org/makeyourownmaker/backupSession.svg?branch=master)]
 ![Lifecycle
 ](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=flat)
 ![R 
->= 3.2.0](https://img.shields.io/badge/R>=3.2.0-blue.svg?style=flat)
+%>%= 3.2.0](https://img.shields.io/badge/R->%3D3.2.0-blue.svg?style=flat)
 ![Dependencies
 ](https://img.shields.io/badge/dependencies-none-brightgreen.svg?style=flat)
 

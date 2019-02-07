@@ -4,23 +4,30 @@
 \alias{save.session}
 \title{save.session Function}
 \usage{
-save.session(basename = "NULL", path = "NULL", version = "NULL",
-  verbose = FALSE, force = FALSE)
+save.session(basename = "NULL", version = format(Sys.time(),
+  "\%y.\%m.\%d.\%H.\%M"), path = getwd(), verbose = FALSE,
+  force = FALSE)
 }
 \arguments{
 \item{basename}{Basename for the R session images, history and session info files.}
 
-\item{path}{Directory to save backup files to.  Defaults to current working directory.  Creates directories unless they exist.}
-
 \item{version}{A date string or version number used as part of the backup filenames.  Cannot be an empty string.  Defaults to year.month.date.hour.minute formatted timestamps.}
+
+\item{path}{Directory to save backup files to.  Defaults to current working directory.  Creates directories unless they exist.}
 
 \item{verbose}{Print session loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.}
 
 \item{force}{Overwrite existing files.  Must be either TRUE or FALSE.  Defaults to FALSE.}
 }
 \description{
-This function saves R session images, history and session info files which can be loaded with load.session().
+This function saves R session images, history and sessionInfo() files which can be loaded with load.session().
+}
+\details{
+History files are NOT saved in non-interactive R sessions.
 }
 \examples{
-save.session(basename='projectX', path='./backups', version='01.03.18.11.43')
+save.session(basename = "projectX", path = "./backups", version = "01.03.18.11.43")
+}
+\seealso{
+[load.session()] and [load.sinfo()]
 }

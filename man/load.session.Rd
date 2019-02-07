@@ -4,23 +4,30 @@
 \alias{load.session}
 \title{load.session Function}
 \usage{
-load.session(basename = "NULL", path = "NULL", version = "NULL",
+load.session(basename = "NULL", version = "NULL", path = getwd(),
   verbose = FALSE)
 }
 \arguments{
-\item{basename}{Basename for the R session images, history and session info files.}
-
-\item{path}{Directory to load backup files from.  Defaults to current working directory.}
+\item{basename}{Basename for the R session images and history files.}
 
 \item{version}{A date string or version number used as part of the backup filenames.  Cannot be an empty string.}
+
+\item{path}{Directory to load backup files from.  Defaults to current working directory.}
 
 \item{verbose}{Print session loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.}
 }
 \description{
-This function loads R session images, history and session info files saved with save.session().
+This function loads R session images, history and sessionInfo() files saved with save.session().
+}
+\details{
+It will overwrite objects in .GlobalEnv just as the load() function does.
+History files are NOT loaded in non-interactive R sessions.
 }
 \examples{
 \dontrun{
-load.session(basename='projectX', path='./backups', version='01.03.18.11.43')
+load.session(basename = "projectX", path = "./backups", version = "01.03.18.11.43")
 }
+}
+\seealso{
+[save.session()] and [load.sinfo()]
 }

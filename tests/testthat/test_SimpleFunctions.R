@@ -2,7 +2,7 @@ context("Simple Functions")
 library(backupSession)
 
 test_that("loadBackupFile: Produces error with unsupported file extensions", {
-  expect_error(loadBackupFile('projectX.12.12.12.NOPE', FALSE), "not supported!")              
+  expect_error(loadBackupFile('projectX.12.12.12.NOPE', FALSE), "not supported")              
 })
 
 # Disabling below test for now to avoid below warning
@@ -16,7 +16,11 @@ test_that("loadBackupFile: Produces error with unsupported file extensions", {
 
 
 test_that("checkLoadBackupFile: Produces error with non-existent files", {
-  expect_error(checkLoadBackupFile('Yproject.12.12.12.RData', FALSE), "does not exist!")              
+  expect_error(checkLoadBackupFile('Yproject.12.12.12.RData', FALSE), "does not exist")              
+})
+
+test_that("load.sinfo: Produces error with non-existent files", {
+  expect_error(load.sinfo(basename='Yproject', version='12.12.12'), "does not exist")              
 })
 
 
@@ -31,7 +35,7 @@ test_that("checkSaveBackupFile: Produces warning with existent files and force=T
 })
 
 fn <- 'projectX.12.12.12.RData';    if (file.exists(fn)) file.remove(fn)
-fn <- 'projectX.12.12.12.RInfo';    if (file.exists(fn)) file.remove(fn)
+fn <- 'projectX.12.12.12.SInfo';    if (file.exists(fn)) file.remove(fn)
 fn <- 'projectX.12.12.12.RHistory'; if (file.exists(fn)) file.remove(fn)
 
 

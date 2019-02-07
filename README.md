@@ -78,7 +78,6 @@ Further info:
 
 ## Roadmap
 
-* Increase test coverage
 * Add meta data file (MData)
   * Check if loading a backup will overwrite existing data in current R session
   * Summarise changes between backups

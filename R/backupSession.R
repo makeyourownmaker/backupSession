@@ -3,51 +3,51 @@
 
 checkBackupParams <- function(basename, path, version, verbose, force) {
   if (basename == "NULL") {
-    stop("Error: Missing 'basename' parameter.", call. = FALSE)
+    stop("Missing 'basename' parameter.", call. = FALSE)
   }
 
   if (class(basename) != "character") {
     errmsg <- paste0(
-      "Error: 'basename' must be a character string:\n",
+      "'basename' must be a character string:\n",
       "* 'basename' is a ", class(basename), "."
     )
     stop(errmsg, call. = FALSE)
   }
 
   if (basename == "") {
-    stop("Error: 'basename' cannot be an empty string.", call. = FALSE)
+    stop("'basename' cannot be an empty string.", call. = FALSE)
   }
 
 
   if (class(path) != "character") {
     errmsg <- paste0(
-      "Error: 'path' must be a character string:\n",
+      "'path' must be a character string:\n",
       "* 'path' is a ", class(path), "."
     )
     stop(errmsg, call. = FALSE)
   }
 
   if (path == "") {
-    stop("Error: 'path' cannot be an empty string.", call. = FALSE)
+    stop("'path' cannot be an empty string.", call. = FALSE)
   }
 
 
   if (class(version) != "character") {
     errmsg <- paste0(
-      "Error: 'version' must be a character string:\n",
+      "'version' must be a character string:\n",
       "* 'version' is a ", class(version), "."
     )
     stop(errmsg, call. = FALSE)
   }
 
   if (version == "") {
-    stop("Error: 'version' cannot be an empty string.", call. = FALSE)
+    stop("'version' cannot be an empty string.", call. = FALSE)
   }
 
 
   if (verbose != TRUE & verbose != FALSE) {
     errmsg <- paste0(
-      "Error: 'verbose' must be TRUE or FALSE:\n",
+      "'verbose' must be TRUE or FALSE:\n",
       "* 'verbose' is ", verbose, "."
     )
     stop(errmsg, call. = FALSE)
@@ -56,7 +56,7 @@ checkBackupParams <- function(basename, path, version, verbose, force) {
 
   if (force != TRUE & force != FALSE) {
     errmsg <- paste0(
-      "Error: 'force' must be TRUE or FALSE:\n",
+      "'force' must be TRUE or FALSE:\n",
       "* 'force' is ", force, "."
     )
     stop(errmsg, call. = FALSE)
@@ -74,12 +74,12 @@ loadBackupFile <- function(loadFile, verbose = FALSE) {
     if (interactive()) {
       utils::loadhistory(file = loadFile)
     } else {
-      warning("Warning: Cannot load history in non-interactive R session.", call. = FALSE)
+      warning("Cannot load history in non-interactive R session.", call. = FALSE)
     }
   }
   else {
     errmsg <- paste0(
-      "Error: ", loadFile, " not supported:\n",
+      loadFile, " not supported:\n",
       "* 'RData' & 'RHistory' files supported."
     )
     stop(errmsg, call. = FALSE)
@@ -97,11 +97,11 @@ checkLoadBackupFile <- function(loadFile, verbose = FALSE) {
   if (!file.exists(loadFile)) { # R 3.2.0 specific (April 2015)
     # Don't warn about missing RHistory files (ref. non-interactive R session problem)
     if (grepl("\\.RHistory$", loadFile, perl = TRUE)) {
-      warning(paste0("Warning: ", loadFile, " does not exist."), call. = FALSE)
+      warning(paste0(loadFile, " does not exist."), call. = FALSE)
     }
     else {
       errmsg <- paste0(
-        "Error: ", loadFile, " does not exist:\n",
+        loadFile, " does not exist:\n",
         "* Check full file path?"
       )
       stop(errmsg, call. = FALSE)
@@ -123,15 +123,18 @@ saveBackupFile <- function(saveFile, verbose = FALSE) {
     if (interactive()) {
       utils::savehistory(file = saveFile)
     } else {
-      warning("Warning: Cannot save history file in non-interactive R session.", call. = FALSE)
+      warning("Cannot save history file in non-interactive R session.", call. = FALSE)
     }
   }
   else if (grepl("\\.SInfo$", saveFile, perl = TRUE)) {
     saveRDS(utils::sessionInfo(), file = saveFile)
   }
+  else if (grepl("\\.MData$", saveFile, perl = TRUE)) {
+    saveRDS(utils::ls.str(all.names = TRUE, envir = .GlobalEnv), file = saveFile)
+  }
   else {
     errmsg <- paste0(
-      "Error: ", saveFile, " not supported:\n",
+      saveFile, " not supported:\n",
       "* 'RData', 'RHistory' & 'SInfo' files supported."
     )
     stop(errmsg, call. = FALSE)
@@ -147,7 +150,7 @@ saveBackupFile <- function(saveFile, verbose = FALSE) {
 
 checkSaveBackupFile <- function(saveFile, force = FALSE, verbose = FALSE) {
   if (file.exists(saveFile)) { # R 3.2.0 specific (April 2015)
-    warning(paste0("Warning: ", saveFile, " already exists:"), call. = FALSE)
+    warning(paste0(saveFile, " already exists:"), call. = FALSE)
 
     if (isTRUE(force)) {
       warning(paste0("* Overwriting ", saveFile, "."), call. = FALSE)
@@ -167,24 +170,71 @@ checkSaveBackupFile <- function(saveFile, force = FALSE, verbose = FALSE) {
 
 getBackupFilenames <- function(basename, path, version) {
 
-  baseFile <- paste0(basename, ".", version)
-  dataFile <- file.path(path, paste0(baseFile, ".RData"))
-  infoFile <- file.path(path, paste0(baseFile, ".SInfo"))
-  histFile <- file.path(path, paste0(baseFile, ".RHistory"))
+  baseFile  <- paste0(basename, ".", version)
+  dataFile  <- file.path(path, paste0(baseFile, ".RData"))
+  infoFile  <- file.path(path, paste0(baseFile, ".SInfo"))
+  histFile  <- file.path(path, paste0(baseFile, ".RHistory"))
+  mDataFile <- file.path(path, paste0(baseFile, ".MData"))
 
-  return(list(data = dataFile, info = infoFile, hist = histFile))
+  return(list(data = dataFile, info = infoFile, hist = histFile, mdata = mDataFile))
+}
+
+
+#' load.mdata Function
+#'
+#' This function loads R meta-data (output of ls.str() function)
+#'
+#' @param basename Basename for the R meta-data file.
+#' @param path Directory to load file from.  Defaults to current working directory.
+#' @param version A date string or version number used as part of the backup filename.  Cannot be an empty string.
+#' @param verbose Print file loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.
+#' @seealso \code{\link{load.session}}, \code{\link{save.session}} and \code{\link{load.sinfo}}
+#' @export
+#' @examples
+#'\dontrun{
+#' mData <- load.mdata(basename = "projectX", path = "./backups", version = "01.03.18.11.43")
+#'}
+load.mdata <- function(basename = "NULL", version = "NULL", path = getwd(), verbose = FALSE) {
+  checkBackupParams(basename, path, version, verbose, force = FALSE)
+
+  # This check is unnecessary in save.session(), so it's not included in checkBackupParams().
+  if (version == "NULL") {
+    stop("Missing 'version' parameter.", call. = FALSE)
+  }
+
+  backupFiles <- getBackupFilenames(basename, path, version)
+  loadFile <- backupFiles$mdata
+  metaData <- NA
+
+  if (grepl("\\.MData$", loadFile, perl = TRUE)) {
+    if (file.exists(loadFile)) { # R 3.2.0 specific (April 2015)
+      metaData <- readRDS(file = loadFile)
+    } else {
+      errmsg <- paste0(
+        loadFile, " does not exist:\n",
+        "* Check full file path?"
+      )
+      stop(errmsg, call. = FALSE)
+    }
+  }
+
+  if (isTRUE(verbose)) {
+    message(paste0("Loaded ", loadFile, "."))
+  }
+
+  return(metaData)
 }
 
 
 #' load.sinfo Function
 #'
-#' This function loads R session information (output of sessionInfo() command)
+#' This function loads R session information (output of sessionInfo() function)
 #'
-#' @param basename Basename for the R session info files.
-#' @param path Directory to load files from.  Defaults to current working directory.
-#' @param version A date string or version number used as part of the backup filenames.  Cannot be an empty string.
+#' @param basename Basename for the R session info file.
+#' @param path Directory to load file from.  Defaults to current working directory.
+#' @param version A date string or version number used as part of the backup filename.  Cannot be an empty string.
 #' @param verbose Print file loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.
-#' @seealso [load.session()] and [save.session()]
+#' @seealso \code{\link{load.session}}, \code{\link{save.session}} and \code{\link{load.mdata}}
 #' @export
 #' @examples
 #'\dontrun{
@@ -195,7 +245,7 @@ load.sinfo <- function(basename = "NULL", version = "NULL", path = getwd(), verb
 
   # This check is unnecessary in save.session(), so it's not included in checkBackupParams().
   if (version == "NULL") {
-    stop("Error: Missing 'version' parameter.", call. = FALSE)
+    stop("Missing 'version' parameter.", call. = FALSE)
   }
 
   backupFiles <- getBackupFilenames(basename, path, version)
@@ -207,7 +257,7 @@ load.sinfo <- function(basename = "NULL", version = "NULL", path = getwd(), verb
       sessionInfo <- readRDS(file = loadFile)
     } else {
       errmsg <- paste0(
-        "Error: ", loadFile, " does not exist:\n",
+        loadFile, " does not exist:\n",
         "* Check full file path?"
       )
       stop(errmsg, call. = FALSE)
@@ -224,7 +274,7 @@ load.sinfo <- function(basename = "NULL", version = "NULL", path = getwd(), verb
 
 #' load.session Function
 #'
-#' This function loads R session images, history and sessionInfo() files saved with save.session().
+#' This function loads R session images and if available history files saved with save.session().
 #'
 #' It will overwrite objects in .GlobalEnv just as the load() function does.
 #' History files are NOT loaded in non-interactive R sessions.
@@ -233,7 +283,7 @@ load.sinfo <- function(basename = "NULL", version = "NULL", path = getwd(), verb
 #' @param path Directory to load backup files from.  Defaults to current working directory.
 #' @param version A date string or version number used as part of the backup filenames.  Cannot be an empty string.
 #' @param verbose Print session loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.
-#' @seealso [save.session()] and [load.sinfo()]
+#' @seealso \code{\link{save.session}}, \code{\link{load.mdata}} and \code{\link{load.sinfo}}
 #' @export
 #' @examples
 #'\dontrun{
@@ -244,7 +294,7 @@ load.session <- function(basename = "NULL", version = "NULL", path = getwd(), ve
 
   # This check is unnecessary in save.session(), so it's not included in checkBackupParams().
   if (version == "NULL") {
-    stop("Error: Missing 'version' parameter.", call. = FALSE)
+    stop("Missing 'version' parameter.", call. = FALSE)
   }
 
   backupFiles <- getBackupFilenames(basename, path, version)
@@ -254,14 +304,14 @@ load.session <- function(basename = "NULL", version = "NULL", path = getwd(), ve
   }
 
   # Check files exist and load them
-  b <- checkLoadBackupFile(backupFiles$data, verbose)
-  c <- checkLoadBackupFile(backupFiles$hist, verbose)
+  b <- checkLoadBackupFile(backupFiles$data,  verbose)
+  c <- checkLoadBackupFile(backupFiles$hist,  verbose)
 }
 
 
 #' save.session Function
 #'
-#' This function saves R session images, history and sessionInfo() files which can be loaded with load.session().
+#' This function saves R session images, history, ls.str() and sessionInfo() files which can be loaded with load.session(), load.mdata() and load.sinfo().
 #'
 #' History files are NOT saved in non-interactive R sessions.
 #'
@@ -270,7 +320,7 @@ load.session <- function(basename = "NULL", version = "NULL", path = getwd(), ve
 #' @param version A date string or version number used as part of the backup filenames.  Cannot be an empty string.  Defaults to year.month.date.hour.minute formatted timestamps.
 #' @param verbose Print session loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.
 #' @param force Overwrite existing files.  Must be either TRUE or FALSE.  Defaults to FALSE.
-#' @seealso [load.session()] and [load.sinfo()]
+#' @seealso \code{\link{load.session}}, \code{\link{load.mdata}} and \code{\link{load.sinfo}}
 #' @export
 #' @examples
 #' save.session(basename = "projectX", path = "./backups", version = "01.03.18.11.43")
@@ -280,9 +330,9 @@ save.session <- function(basename = "NULL", version = format(Sys.time(), "%y.%m.
   # Create directory if not exists
   if (!dir.exists(path)) { # R 3.2.0 specific
     tryCatch(dir.create(file.path(path), recursive = TRUE),
-      error   = function(c) stop(paste0("Error: Cannot create directory ", path, ":\n"), conditionMessage(c), call. = FALSE),
-      warning = function(c) stop(paste0("Error: Cannot create directory ", path, ":\n"), conditionMessage(c), call. = FALSE),
-      message = function(c) warning(paste0("Warning: Created ", path, "."), call. = FALSE)
+      error   = function(c) stop(paste0("Cannot create directory ", path, ":\n"), conditionMessage(c), call. = FALSE),
+      warning = function(c) stop(paste0("Cannot create directory ", path, ":\n"), conditionMessage(c), call. = FALSE),
+      message = function(c) warning(paste0("Created ", path, "."), call. = FALSE)
     )
   }
 
@@ -293,17 +343,18 @@ save.session <- function(basename = "NULL", version = format(Sys.time(), "%y.%m.
   }
 
   # Check files don't exist and save them
-  b <- checkSaveBackupFile(backupFiles$data, force, verbose)
-  c <- checkSaveBackupFile(backupFiles$hist, force, verbose)
-  d <- checkSaveBackupFile(backupFiles$info, force, verbose)
+  b <- checkSaveBackupFile(backupFiles$data,  force, verbose)
+  c <- checkSaveBackupFile(backupFiles$hist,  force, verbose)
+  d <- checkSaveBackupFile(backupFiles$info,  force, verbose)
+  e <- checkSaveBackupFile(backupFiles$mdata, force, verbose)
 }
 
 
-#' backupSession: Save and Load R Session Images, History and sessionInfo
+#' backupSession: Save and Load R Session Images, History, meta-data and sessionInfo
 #'
-#' Save and load consistently named and versioned session images, history and sessionInfo().
-#' This package will save and load three types of files: 1) R session images, 2) R command histories and 3) R sessionInfo() output.
-#' See ?save.session, ?load.session and ?load.sinfo for usage examples and further information.
+#' Save and load consistently named and versioned session images, history, meta-data and sessionInfo().
+#' This package will save and load four types of files: 1) R session images, 2) R command histories, 3) R ls.str() output and 4) R sessionInfo() output.
+#' See \code{\link{save.session}}, \code{\link{load.session}}, \code{\link{load.mdata}} and \code{\link{load.sinfo}} for usage examples and further information.
 #'
 #' @docType package
 #' @name backupSession

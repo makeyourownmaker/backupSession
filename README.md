@@ -12,7 +12,7 @@ Status](https://travis-ci.org/makeyourownmaker/backupSession.svg?branch=master)]
 ![Dependencies
 ](https://img.shields.io/badge/dependencies-none-brightgreen.svg?style=flat)
 
-backupSession is an R package for saving and loading consistently named and versioned R session images, history and sessionInfo().
+backupSession is an R package for saving and loading consistently named and versioned R session images, history, meta-data and sessionInfo().
 
 
 ## Usage
@@ -49,9 +49,12 @@ devtools::install_github("makeyourownmaker/backupSession")
 The save.session function saves three files: 
 1) R session image in path/basename.version.RData
 2) R history in path/basename.version.RHistory
-3) R sessionInfo() in path/basename.version.SInfo
+3) R meta-data in path/basename.version.MData
+4) R sessionInfo() in path/basename.version.SInfo
 
 The load.session function loads session images and if available session history files into the current R session.  It will overwrite existing data.
+
+The load.mdata function loads the saved meta-data (output of the ls.str() command) into the current R session.
 
 The load.sinfo function loads the saved output of the sessionInfo() command into the current R session.
 
@@ -60,7 +63,7 @@ using the path parameter unless they exist.
 
 The version parameter in the save.session function defaults to a timestamp ("%y.%m%.%d.%H.%M" eg. 2018.12.30.09:40) unless an alternative is specified.
 
-The save.session, load.session and load.sinfo functions have verbose options which print session saving and loading progress messages.
+The save.session, load.session, load.mdata and load.sinfo functions have verbose options which print session saving and loading progress messages.
 
 The force option in the save.session function will overwrite existing files.
 
@@ -72,16 +75,17 @@ Further info:
 ```
 ?save.session
 ?load.session
+?load.mdata
 ?load.sinfo
 ```
 
 
 ## Roadmap
 
-* Add meta data file (MData)
+* Enhance meta data file support
   * Check if loading a backup will overwrite existing data in current R session
   * Summarise changes between backups
-  * Remove excess backup files
+  * Remove redundant and/or excess backup files
 * Make CRAN release
 
 

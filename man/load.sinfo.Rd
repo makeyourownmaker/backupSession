@@ -8,16 +8,16 @@ load.sinfo(basename = "NULL", version = "NULL", path = getwd(),
   verbose = FALSE)
 }
 \arguments{
-\item{basename}{Basename for the R session info files.}
+\item{basename}{Basename for the R session info file.}
 
-\item{version}{A date string or version number used as part of the backup filenames.  Cannot be an empty string.}
+\item{version}{A date string or version number used as part of the backup filename.  Cannot be an empty string.}
 
-\item{path}{Directory to load files from.  Defaults to current working directory.}
+\item{path}{Directory to load file from.  Defaults to current working directory.}
 
 \item{verbose}{Print file loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.}
 }
 \description{
-This function loads R session information (output of sessionInfo() command)
+This function loads R session information (output of sessionInfo() function)
 }
 \examples{
 \dontrun{
@@ -25,5 +25,5 @@ sInfo <- load.sinfo(basename = "projectX", path = "./backups", version = "01.03.
 }
 }
 \seealso{
-[load.session()] and [save.session()]
+\code{\link{load.session}}, \code{\link{save.session}} and \code{\link{load.mdata}}
 }

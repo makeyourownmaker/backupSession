@@ -17,7 +17,7 @@ load.session(basename = "NULL", version = "NULL", path = getwd(),
 \item{verbose}{Print session loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.}
 }
 \description{
-This function loads R session images, history and sessionInfo() files saved with save.session().
+This function loads R session images and if available history files saved with save.session().
 }
 \details{
 It will overwrite objects in .GlobalEnv just as the load() function does.
@@ -29,5 +29,5 @@ load.session(basename = "projectX", path = "./backups", version = "01.03.18.11.4
 }
 }
 \seealso{
-[save.session()] and [load.sinfo()]
+\code{\link{save.session}}, \code{\link{load.mdata}} and \code{\link{load.sinfo}}
 }

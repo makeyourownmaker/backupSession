@@ -20,7 +20,7 @@ save.session(basename = "NULL", version = format(Sys.time(),
 \item{force}{Overwrite existing files.  Must be either TRUE or FALSE.  Defaults to FALSE.}
 }
 \description{
-This function saves R session images, history and sessionInfo() files which can be loaded with load.session().
+This function saves R session images, history, ls.str() and sessionInfo() files which can be loaded with load.session(), load.mdata() and load.sinfo().
 }
 \details{
 History files are NOT saved in non-interactive R sessions.
@@ -29,5 +29,5 @@ History files are NOT saved in non-interactive R sessions.
 save.session(basename = "projectX", path = "./backups", version = "01.03.18.11.43")
 }
 \seealso{
-[load.session()] and [load.sinfo()]
+\code{\link{load.session}}, \code{\link{load.mdata}} and \code{\link{load.sinfo}}
 }

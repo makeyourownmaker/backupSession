@@ -1,7 +1,7 @@
 Package: backupSession
-Title: Save and Load R Session Images, History and sessionInfo
-Description: Save and load consistently named and versioned session images, history and sessionInfo().  This package will save and load three types of files: 1) R session images, 2) R command histories and 3) R sessionInfo() output.
-Version: 0.2.0
+Title: Save and Load R Session Images, History, Metadata and sessionInfo
+Description: Save and load consistently named and versioned session images, history, metadata and sessionInfo().  This package will save and load four types of files: 1) R session images, 2) R command histories, 3) R ls.str() output and 4) R sessionInfo() output.
+Version: 0.3.0
 Depends: R (>= 3.2.0)
 Authors@R: person("makeyourownmaker", email = "makeyourownmaker@gmx.com", role = c("aut", "cre"))
 Author: makeyourownmaker [aut, cre]

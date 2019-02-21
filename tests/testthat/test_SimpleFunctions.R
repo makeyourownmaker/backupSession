@@ -23,6 +23,10 @@ test_that("load.sinfo: Produces error with non-existent files", {
   expect_error(load.sinfo(basename='Yproject', version='12.12.12'), "does not exist")              
 })
 
+test_that("load.mdata: Produces error with non-existent files", {
+  expect_error(load.mdata(basename='Yproject', version='12.12.12'), "does not exist")              
+})
+
 
 save.session(basename='projectX', path='.', version='12.12.12')
 
@@ -35,12 +39,13 @@ test_that("checkSaveBackupFile: Produces warning with existent files and force=T
 })
 
 fn <- 'projectX.12.12.12.RData';    if (file.exists(fn)) file.remove(fn)
+fn <- 'projectX.12.12.12.MData';    if (file.exists(fn)) file.remove(fn)
 fn <- 'projectX.12.12.12.SInfo';    if (file.exists(fn)) file.remove(fn)
 fn <- 'projectX.12.12.12.RHistory'; if (file.exists(fn)) file.remove(fn)
 
 
-test_that("getBackupFilenames returns a list of size 3" , {
-  expect_output(str(getBackupFilenames('projectX', './', '12.12.12')), "List of 3")
+test_that("getBackupFilenames returns a list of size 4" , {
+  expect_output(str(getBackupFilenames('projectX', './', '12.12.12')), "List of 4")
 })
   
 

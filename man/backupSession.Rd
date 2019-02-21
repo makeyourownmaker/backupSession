@@ -4,9 +4,9 @@
 \name{backupSession}
 \alias{backupSession}
 \alias{backupSession-package}
-\title{backupSession: Save and Load R Session Images, History and sessionInfo}
+\title{backupSession: Save and Load R Session Images, History, meta-data and sessionInfo}
 \description{
-Save and load consistently named and versioned session images, history and sessionInfo().
-This package will save and load three types of files: 1) R session images, 2) R command histories and 3) R sessionInfo() output.
-See ?save.session, ?load.session and ?load.sinfo for usage examples and further information.
+Save and load consistently named and versioned session images, history, meta-data and sessionInfo().
+This package will save and load four types of files: 1) R session images, 2) R command histories, 3) R ls.str() output and 4) R sessionInfo() output.
+See \code{\link{save.session}}, \code{\link{load.session}}, \code{\link{load.mdata}} and \code{\link{load.sinfo}} for usage examples and further information.
 }

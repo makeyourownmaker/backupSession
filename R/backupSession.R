@@ -182,9 +182,9 @@ getBackupFilenames <- function(basename, path, version) {
 
 #' load.mdata Function
 #'
-#' This function loads R meta-data (output of ls.str() function)
+#' This function loads R metadata (output of ls.str() function)
 #'
-#' @param basename Basename for the R meta-data file.
+#' @param basename Basename for the R metadata file.
 #' @param path Directory to load file from.  Defaults to current working directory.
 #' @param version A date string or version number used as part of the backup filename.  Cannot be an empty string.
 #' @param verbose Print file loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.
@@ -350,9 +350,9 @@ save.session <- function(basename = "NULL", version = format(Sys.time(), "%y.%m.
 }
 
 
-#' backupSession: Save and Load R Session Images, History, meta-data and sessionInfo
+#' backupSession: Save and Load R Session Images, History, metadata and sessionInfo
 #'
-#' Save and load consistently named and versioned session images, history, meta-data and sessionInfo().
+#' Save and load consistently named and versioned session images, history, metadata and sessionInfo().
 #' This package will save and load four types of files: 1) R session images, 2) R command histories, 3) R ls.str() output and 4) R sessionInfo() output.
 #' See \code{\link{save.session}}, \code{\link{load.session}}, \code{\link{load.mdata}} and \code{\link{load.sinfo}} for usage examples and further information.
 #'

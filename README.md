@@ -12,7 +12,7 @@ Status](https://travis-ci.org/makeyourownmaker/backupSession.svg?branch=master)]
 ![Dependencies
 ](https://img.shields.io/badge/dependencies-none-brightgreen.svg?style=flat)
 
-backupSession is an R package for saving and loading consistently named and versioned R session images, history, meta-data and sessionInfo().
+backupSession is an R package for saving and loading consistently named and versioned R session images, history, metadata and sessionInfo().
 
 
 ## Usage
@@ -49,12 +49,12 @@ devtools::install_github("makeyourownmaker/backupSession")
 The save.session function saves three files: 
 1) R session image in path/basename.version.RData
 2) R history in path/basename.version.RHistory
-3) R meta-data in path/basename.version.MData
+3) R metadata in path/basename.version.MData
 4) R sessionInfo() in path/basename.version.SInfo
 
 The load.session function loads session images and if available session history files into the current R session.  It will overwrite existing data.
 
-The load.mdata function loads the saved meta-data (output of the ls.str() command) into the current R session.
+The load.mdata function loads the saved metadata (output of the ls.str() command) into the current R session.
 
 The load.sinfo function loads the saved output of the sessionInfo() command into the current R session.
 

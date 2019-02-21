@@ -8,7 +8,7 @@ load.mdata(basename = "NULL", version = "NULL", path = getwd(),
   verbose = FALSE)
 }
 \arguments{
-\item{basename}{Basename for the R meta-data file.}
+\item{basename}{Basename for the R metadata file.}
 
 \item{version}{A date string or version number used as part of the backup filename.  Cannot be an empty string.}
 
@@ -17,7 +17,7 @@ load.mdata(basename = "NULL", version = "NULL", path = getwd(),
 \item{verbose}{Print file loading progress messages.  Must be either TRUE or FALSE.  Defaults to FALSE.}
 }
 \description{
-This function loads R meta-data (output of ls.str() function)
+This function loads R metadata (output of ls.str() function)
 }
 \examples{
 \dontrun{

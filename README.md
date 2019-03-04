@@ -19,6 +19,21 @@ backupSession is an R package for saving and loading consistently named and vers
 
 <img src="man/figures/backupSession_animated.gif" align="center" />
 
+Avoid one by one saving inconsistently named and/or versioned session images, history files etc :-)
+
+```
+# Start new R session
+library(backupSession)
+# Work, work, work ...
+save.session(basename='projectX', version='01.03.18.11.43', path='./backups')
+q('no')
+
+# Restart R session
+library(backupSession)
+load.session(basename='projectX', version='01.03.18.11.43', path='./backups')
+# Data, command history etc loaded
+```
+
 
 
 ## Installation

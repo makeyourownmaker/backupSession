@@ -21,7 +21,7 @@ backupSession is an R package for saving and loading consistently named and vers
 
 Avoid one by one saving inconsistently named and/or versioned session images, history files etc :-)
 
-```
+```r
 # Start new R session
 library(backupSession)
 # Work, work, work ...
@@ -40,7 +40,7 @@ load.session(basename='projectX', version='01.03.18.11.43', path='./backups')
 
 Requires R version 3.2.0 and higher.
 
-```
+```r
 install.packages("devtools") # Install devtools package if necessary
 library(devtools)
 devtools::install_github("makeyourownmaker/backupSession")
@@ -75,7 +75,7 @@ History files are not saved during __non-interactive__ R sessions.  So may not a
 The [testthat](http://testthat.r-lib.org/) package is required to run the tests but is not required for normal installations.
 
 Further info:
-```
+```r
 ?save.session
 ?load.session
 ?load.mdata

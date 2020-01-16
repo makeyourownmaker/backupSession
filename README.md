@@ -49,7 +49,7 @@ devtools::install_github("makeyourownmaker/backupSession")
 
 ## Details
 
-The save.session function saves three files: 
+The save.session function saves four files:
 1) R session image in path/basename.version.RData
 2) R history in path/basename.version.RHistory
 3) R metadata in path/basename.version.MData

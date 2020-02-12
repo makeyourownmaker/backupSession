@@ -14,6 +14,8 @@ Status](https://travis-ci.org/makeyourownmaker/backupSession.svg?branch=master)]
 
 backupSession is an R package for saving and loading consistently named and versioned R session images, history, metadata and sessionInfo().
 
+If you like backupSession, give it a star, or fork it and contribute!
+
 
 ## Usage 
 

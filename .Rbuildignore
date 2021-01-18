@@ -2,4 +2,4 @@
 ^\.gitignore$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.travis\.yml$
+^\.github$
